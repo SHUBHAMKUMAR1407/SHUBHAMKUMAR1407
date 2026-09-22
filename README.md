@@ -1,9 +1,11 @@
-#  Shubham Kumar
-Full-stack developer (and part-time bug creator).<br>
-I deploy code like I lift weights — with confidence and regret.<br>
-Currently learning system design and how not to break production.<br>
-Ask me about APIs, backend scaling, or how to survive merge conflicts.<br>
-Fun fact: My Git commits have more reps than my biceps.<br><br>
+# Hi, I'm Shubham Kumar 👋
+
+### Full-Stack Developer | MERN Stack | React & Node.js
+
+🚀 Building scalable and user-focused web applications  
+💻 Experienced with React, Next.js, Node.js, Express & MongoDB  
+🌱 Currently learning System Design, LLD & Scalable Architecture  
+⚡ Interested in Backend Development, APIs & Distributed Systems
 
 
 ## 🌐 Socials:
