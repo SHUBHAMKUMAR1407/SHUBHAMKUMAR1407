@@ -9,11 +9,12 @@
 
 ## 👨‍💻 About Me
 
-I'm a Full-Stack Developer focused on building scalable, production-ready web applications.
+Full-Stack Developer focused on building reliable web applications and
+backend systems that solve real-world problems.
 
-💻 Experienced in React, Next.js, TypeScript, Node.js & PostgreSQL  
-🔧 Interested in REST APIs, authentication, RBAC & backend architecture  
-🚀 Passionate about solving real-world problems through clean and reliable software
+- 🔧 Experienced in REST APIs, JWT authentication, RBAC & multi-vendor platforms
+- 🏗️ Interested in scalable backend architecture and performance optimization
+- 🚀 Passionate about clean code, system design and building production-ready solutions
 
 
 ## 🌐 Socials:
