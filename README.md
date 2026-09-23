@@ -84,7 +84,7 @@ backend systems that solve real-world problems.
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white)
 
-# 📊 GitHub Stats
+## 📊 GitHub Stats
 
 <div align="center">
 
