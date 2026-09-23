@@ -7,27 +7,20 @@
 🔧 Building REST APIs, authentication, RBAC & multi-vendor platforms  
 ⚡ Focused on clean architecture, performance & real-world solutions
 
----
-
 ## 👨‍💻 About Me
 
-Full-Stack Developer focused on building reliable web applications and
-backend systems that solve real-world problems.
+Full-Stack Developer focused on building reliable web applications and backend systems that solve real-world problems.
 
 - 🔧 Experienced in REST APIs, JWT authentication, RBAC & multi-vendor platforms
 - 🏗️ Interested in scalable backend architecture and performance optimization
-- 🚀 Passionate about clean code, system design and production-ready solutions
-
----
+- 🚀 Passionate about clean code, system design and building production-ready solutions
 
 ## 🌐 Connect With Me
 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/_shubham.yadavv/)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/_shubham.yadavv_/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shubham-kumar-5b986b257/)
 [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/Shubham03611230)
 [![Email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:sky143c@gmail.com)
-
----
 
 # 💻 Tech Stack
 
@@ -100,30 +93,6 @@ backend systems that solve real-world problems.
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![Blender](https://img.shields.io/badge/Blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white)
 
----
-
-## 🚀 Featured Projects
-
-### 🤖 Narrata — AI-Powered Story Generation Platform
-
-AI-powered platform for generating personalized stories using natural language prompts.
-
-**Tech:** Next.js • TypeScript • Tailwind CSS • Gemini API
-
-### 🩺 CareMate — Doctor Appointment System
-
-Full-stack appointment platform with role-based access for Admin, Doctor and Patient.
-
-**Tech:** React • Node.js • MongoDB • JWT
-
-### ⛏️ SafeMine — Mining Safety Platform
-
-Mining safety platform with real-time geospatial tracking, multilingual support and role-based incident management.
-
-**Tech:** React • Node.js • Leaflet.js • i18next
-
----
-
 ## 📊 GitHub Stats
 
 <div align="center">
@@ -134,15 +103,13 @@ Mining safety platform with real-time geospatial tracking, multilingual support 
 
 </div>
 
----
-
 ### ✍️ Random Dev Quote
 
-![Random Dev Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
+![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
 ---
 
-[![Profile Views](https://visitcount.itsvg.in/api?id=SHUBHAMKUMAR1407&icon=3&color=0)](https://visitcount.itsvg.in)
+[![](https://visitcount.itsvg.in/api?id=Choudhary4&icon=3&color=0)](https://visitcount.itsvg.in)
 
 <!--
 **SHUBHAMKUMAR1407/SHUBHAMKUMAR1407** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
