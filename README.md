@@ -9,11 +9,12 @@
 
 ## 👨‍💻 About Me
 
-Full-Stack Developer focused on building reliable web applications and backend systems that solve real-world problems.
+I'm a Full-Stack Developer who enjoys turning ideas into scalable and user-friendly web applications.
 
-- 🔧 Experienced in REST APIs, JWT authentication, RBAC & multi-vendor platforms
-- 🏗️ Interested in scalable backend architecture and performance optimization
-- 🚀 Passionate about clean code, system design and building production-ready solutions
+- 🚀 Experienced in developing modern web applications with React, Next.js and Node.js
+- 🧩 Comfortable working across both frontend and backend development
+- 🔐 Interested in secure APIs, authentication, RBAC and scalable architectures
+- 🏗️ Focused on writing clean, maintainable code and solving real-world problems
 
 ## 🌐 Connect With Me
 
