@@ -16,26 +16,421 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate GitHub Stats
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true&theme=dark&hide_border=true
-          path: profile/stats.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate Top Languages
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: top-langs
-          options: username=${{ github.repository_owner }}&layout=compact&theme=dark&hide_border=true&langs_count=8
-          path: profile/top-langs.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit Stats
+      - name: Generate Custom GitHub Stats
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: SHUBHAMKUMAR1407
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git add profile/*.svg
+          node <<'EOF'
+          const fs = require("fs");
+
+          const username = process.env.USERNAME;
+          const token = process.env.GH_TOKEN;
+
+          async function github(url, options = {}) {
+            const response = await fetch(url, {
+              ...options,
+              headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+                ...(options.headers || {})
+              }
+            });
+
+            if (!response.ok) {
+              throw new Error(`${response.status}: ${await response.text()}`);
+            }
+
+            return response.json();
+          }
+
+          async function getAllRepos() {
+            let repos = [];
+            let page = 1;
+
+            while (true) {
+              const data = await github(
+                `https://api.github.com/users/${username}/repos?per_page=100&page=${page}&type=owner`
+              );
+
+              repos.push(...data);
+
+              if (data.length < 100) break;
+              page++;
+            }
+
+            return repos;
+          }
+
+          function escapeXml(value) {
+            return String(value)
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&apos;");
+          }
+
+          function formatNumber(number) {
+            if (number >= 1000) {
+              return (number / 1000).toFixed(1).replace(".0", "") + "k";
+            }
+            return number.toString();
+          }
+
+          function languageColor(language) {
+            const colors = {
+              JavaScript: "#f7df1e",
+              TypeScript: "#3178c6",
+              Python: "#3776ab",
+              HTML: "#e34f26",
+              CSS: "#563d7c",
+              Java: "#b07219",
+              C: "#555555",
+              "C++": "#f34b7d",
+              PHP: "#4F5D95",
+              Go: "#00ADD8",
+              Rust: "#dea584",
+              Dart: "#00B4AB",
+              Shell: "#89e051"
+            };
+
+            return colors[language] || "#6e7681";
+          }
+
+          async function main() {
+            console.log(`Fetching GitHub data for ${username}...`);
+
+            const user = await github(
+              `https://api.github.com/users/${username}`
+            );
+
+            const repos = await getAllRepos();
+
+            let stars = 0;
+
+            for (const repo of repos) {
+              stars += repo.stargazers_count || 0;
+            }
+
+            /*
+             * Calculate language usage from repository language statistics.
+             */
+            const languageBytes = {};
+
+            for (const repo of repos) {
+              try {
+                const languages = await github(
+                  `https://api.github.com/repos/${username}/${repo.name}/languages`
+                );
+
+                for (const [language, bytes] of Object.entries(languages)) {
+                  languageBytes[language] =
+                    (languageBytes[language] || 0) + bytes;
+                }
+              } catch (error) {
+                console.log(`Skipping languages for ${repo.name}`);
+              }
+            }
+
+            const sortedLanguages = Object.entries(languageBytes)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 5);
+
+            const totalLanguageBytes = sortedLanguages.reduce(
+              (sum, [, bytes]) => sum + bytes,
+              0
+            );
+
+            const languages = sortedLanguages.map(([name, bytes]) => ({
+              name,
+              percentage: ((bytes / totalLanguageBytes) * 100).toFixed(1),
+              color: languageColor(name)
+            }));
+
+            /*
+             * Get contribution count using GitHub GraphQL.
+             */
+            let contributions = 0;
+
+            try {
+              const query = `
+                query($login: String!) {
+                  user(login: $login) {
+                    contributionsCollection {
+                      contributionCalendar {
+                        totalContributions
+                      }
+                    }
+                  }
+                }
+              `;
+
+              const result = await github("https://api.github.com/graphql", {
+                method: "POST",
+                body: JSON.stringify({
+                  query,
+                  variables: {
+                    login: username
+                  }
+                }),
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              });
+
+              contributions =
+                result?.data?.user?.contributionsCollection
+                  ?.contributionCalendar
+                  ?.totalContributions || 0;
+            } catch (error) {
+              console.log("Could not fetch contributions:", error.message);
+            }
+
+            const followers = user.followers || 0;
+            const following = user.following || 0;
+            const repositories = user.public_repos || repos.length;
+
+            const svg = `
+          <svg width="1400" height="520" viewBox="0 0 1400 520"
+               xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+              <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0d1117"/>
+                <stop offset="100%" stop-color="#111820"/>
+              </linearGradient>
+
+              <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#101820"/>
+                <stop offset="100%" stop-color="#111a24"/>
+              </linearGradient>
+
+              <linearGradient id="barBg" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#17212d"/>
+                <stop offset="100%" stop-color="#202d3c"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background -->
+            <rect width="1400" height="520" fill="url(#background)"/>
+
+            <!-- Heading -->
+            <text x="70" y="65"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="32"
+                  font-weight="700"
+                  fill="#f0f6fc">
+              📊 GitHub Stats
+            </text>
+
+            <line x1="70" y1="88" x2="1330" y2="88"
+                  stroke="#30363d"
+                  stroke-width="1"/>
+
+            <!-- Left Card -->
+            <rect x="70" y="110" width="625" height="350"
+                  rx="12"
+                  fill="url(#card)"
+                  stroke="#303b49"
+                  stroke-width="1.5"/>
+
+            <!-- Right Card -->
+            <rect x="720" y="110" width="610" height="350"
+                  rx="12"
+                  fill="url(#card)"
+                  stroke="#303b49"
+                  stroke-width="1.5"/>
+
+            <!-- Name -->
+            <text x="100" y="165"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="31"
+                  font-weight="700"
+                  fill="#f0f6fc">
+              ${escapeXml(user.name || username)}
+            </text>
+
+            <text x="100" y="198"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="19"
+                  fill="#8b949e">
+              Software Developer
+            </text>
+
+            <!-- Stats -->
+            <text x="100" y="245"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="20"
+                  fill="#c9d1d9">
+              ▣  Repositories
+            </text>
+
+            <text x="360" y="245"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="21"
+                  font-weight="700"
+                  fill="#2f81f7">
+              ${formatNumber(repositories)}
+            </text>
+
+            <text x="100" y="285"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="20"
+                  fill="#c9d1d9">
+              ⎇  Contributions
+            </text>
+
+            <text x="360" y="285"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="21"
+                  font-weight="700"
+                  fill="#3fb950">
+              ${formatNumber(contributions)}
+            </text>
+
+            <text x="100" y="325"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="20"
+                  fill="#c9d1d9">
+              ★  Stars
+            </text>
+
+            <text x="360" y="325"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="21"
+                  font-weight="700"
+                  fill="#f2cc60">
+              ${formatNumber(stars)}
+            </text>
+
+            <text x="100" y="365"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="20"
+                  fill="#c9d1d9">
+              👥  Followers
+            </text>
+
+            <text x="360" y="365"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="21"
+                  font-weight="700"
+                  fill="#a371f7">
+              ${formatNumber(followers)}
+            </text>
+
+            <text x="100" y="405"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="20"
+                  fill="#c9d1d9">
+              ◉  Following
+            </text>
+
+            <text x="360" y="405"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="21"
+                  font-weight="700"
+                  fill="#f85149">
+              ${formatNumber(following)}
+            </text>
+
+            <!-- GitHub logo -->
+            <circle cx="575" cy="280" r="62"
+                    fill="#f0f6fc"/>
+
+            <text x="575" y="302"
+                  text-anchor="middle"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="75"
+                  fill="#0d1117">
+              ●
+            </text>
+
+            <text x="575" y="380"
+                  text-anchor="middle"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="17"
+                  fill="#8b949e">
+              Code • Build • Learn
+            </text>
+
+            <text x="575" y="405"
+                  text-anchor="middle"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="17"
+                  fill="#8b949e">
+              Repeat
+            </text>
+
+            <!-- Languages -->
+            <text x="755" y="165"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="30"
+                  font-weight="700"
+                  fill="#f0f6fc">
+              Top Languages
+            </text>
+
+            ${languages.map((lang, index) => {
+              const y = 220 + index * 48;
+              const width = Math.max(
+                30,
+                (parseFloat(lang.percentage) / 100) * 330
+              );
+
+              return `
+                <text x="755" y="${y}"
+                      font-family="Arial, Helvetica, sans-serif"
+                      font-size="19"
+                      fill="#f0f6fc">
+                  ${escapeXml(lang.name)}
+                </text>
+
+                <rect x="915" y="${y - 17}"
+                      width="330"
+                      height="16"
+                      rx="8"
+                      fill="url(#barBg)"/>
+
+                <rect x="915" y="${y - 17}"
+                      width="${width}"
+                      height="16"
+                      rx="8"
+                      fill="${lang.color}"/>
+
+                <text x="1295" y="${y}"
+                      text-anchor="end"
+                      font-family="Arial, Helvetica, sans-serif"
+                      font-size="18"
+                      fill="#c9d1d9">
+                  ${lang.percentage}%
+                </text>
+              `;
+            }).join("")}
+
+          </svg>
+          `;
+
+            fs.mkdirSync("profile", { recursive: true });
+            fs.writeFileSync("profile/github-stats.svg", svg);
+
+            console.log("GitHub stats generated successfully.");
+          }
+
+          main().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          EOF
+
+      - name: Commit GitHub Stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add profile/github-stats.svg
+
           git commit -m "Update GitHub stats" || exit 0
+
           git push
