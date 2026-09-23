@@ -97,9 +97,13 @@ Full-Stack Developer focused on building reliable web applications and backend s
 
 <div align="center">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=SHUBHAMKUMAR1407&show_icons=true&theme=dark&hide_border=true)
+<a href="https://github.com/SHUBHAMKUMAR1407">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=SHUBHAMKUMAR1407&show_icons=true&theme=dark&include_all_commits=true&count_private=true&hide_border=true" />
+</a>
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=SHUBHAMKUMAR1407&layout=compact&theme=dark&hide_border=true)
+<a href="https://github.com/SHUBHAMKUMAR1407">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=SHUBHAMKUMAR1407&layout=compact&theme=dark&hide_border=true&langs_count=8" />
+</a>
 
 </div>
 
