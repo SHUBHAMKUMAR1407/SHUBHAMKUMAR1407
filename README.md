@@ -97,7 +97,7 @@ Full-Stack Developer focused on building reliable web applications and backend s
 
 <div align="center">
 
-<img src="./profile/github-stats.svg" width="100%" alt="GitHub Stats" />
+<img src="./profile/github-stats.svg?v=2" width="100%" alt="GitHub Stats" />
 
 </div>
 
