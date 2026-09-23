@@ -97,9 +97,7 @@ Full-Stack Developer focused on building reliable web applications and backend s
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/SHUBHAMKUMAR1407/SHUBHAMKUMAR1407/main/profile/stats.svg" height="180" alt="GitHub Stats" />
-
-<img src="https://raw.githubusercontent.com/SHUBHAMKUMAR1407/SHUBHAMKUMAR1407/main/profile/top-langs.svg" height="180" alt="Top Languages" />
+<img src="./profile/github-stats.svg" width="100%" alt="GitHub Stats" />
 
 </div>
 
