@@ -1,0 +1,318 @@
+
+<svg width="1400" height="520" viewBox="0 0 1400 520"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#111820"/>
+    </linearGradient>
+
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101820"/>
+      <stop offset="100%" stop-color="#111a24"/>
+    </linearGradient>
+
+    <linearGradient id="barBg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#17212d"/>
+      <stop offset="100%" stop-color="#202d3c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="520" fill="url(#background)"/>
+
+  <!-- Heading -->
+  <text x="70" y="65"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="32"
+        font-weight="700"
+        fill="#f0f6fc">
+    📊 GitHub Stats
+  </text>
+
+  <line x1="70" y1="88" x2="1330" y2="88"
+        stroke="#30363d"
+        stroke-width="1"/>
+
+  <!-- Left Card -->
+  <rect x="70" y="110" width="625" height="350"
+        rx="12"
+        fill="url(#card)"
+        stroke="#303b49"
+        stroke-width="1.5"/>
+
+  <!-- Right Card -->
+  <rect x="720" y="110" width="610" height="350"
+        rx="12"
+        fill="url(#card)"
+        stroke="#303b49"
+        stroke-width="1.5"/>
+
+  <!-- Name -->
+  <text x="100" y="165"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="31"
+        font-weight="700"
+        fill="#f0f6fc">
+    SHUBHAM KUMAR
+  </text>
+
+  <text x="100" y="198"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="19"
+        fill="#8b949e">
+    Software Developer
+  </text>
+
+  <!-- Stats -->
+  <text x="100" y="245"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        fill="#c9d1d9">
+    ▣  Repositories
+  </text>
+
+  <text x="360" y="245"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="21"
+        font-weight="700"
+        fill="#2f81f7">
+    16
+  </text>
+
+  <text x="100" y="285"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        fill="#c9d1d9">
+    ⎇  Contributions
+  </text>
+
+  <text x="360" y="285"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="21"
+        font-weight="700"
+        fill="#3fb950">
+    344
+  </text>
+
+  <text x="100" y="325"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        fill="#c9d1d9">
+    ★  Stars
+  </text>
+
+  <text x="360" y="325"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="21"
+        font-weight="700"
+        fill="#f2cc60">
+    0
+  </text>
+
+  <text x="100" y="365"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        fill="#c9d1d9">
+    👥  Followers
+  </text>
+
+  <text x="360" y="365"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="21"
+        font-weight="700"
+        fill="#a371f7">
+    1
+  </text>
+
+  <text x="100" y="405"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        fill="#c9d1d9">
+    ◉  Following
+  </text>
+
+  <text x="360" y="405"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="21"
+        font-weight="700"
+        fill="#f85149">
+    1
+  </text>
+
+  <!-- GitHub logo -->
+  <circle cx="575" cy="280" r="62"
+          fill="#f0f6fc"/>
+
+  <text x="575" y="302"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="75"
+        fill="#0d1117">
+    ●
+  </text>
+
+  <text x="575" y="380"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="17"
+        fill="#8b949e">
+    Code • Build • Learn
+  </text>
+
+  <text x="575" y="405"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="17"
+        fill="#8b949e">
+    Repeat
+  </text>
+
+  <!-- Languages -->
+  <text x="755" y="165"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="30"
+        font-weight="700"
+        fill="#f0f6fc">
+    Top Languages
+  </text>
+
+  
+      <text x="755" y="220"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="19"
+            fill="#f0f6fc">
+        Jupyter Notebook
+      </text>
+
+      <rect x="915" y="203"
+            width="330"
+            height="16"
+            rx="8"
+            fill="url(#barBg)"/>
+
+      <rect x="915" y="203"
+            width="184.14"
+            height="16"
+            rx="8"
+            fill="#6e7681"/>
+
+      <text x="1295" y="220"
+            text-anchor="end"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="18"
+            fill="#c9d1d9">
+        55.8%
+      </text>
+    
+      <text x="755" y="268"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="19"
+            fill="#f0f6fc">
+        JavaScript
+      </text>
+
+      <rect x="915" y="251"
+            width="330"
+            height="16"
+            rx="8"
+            fill="url(#barBg)"/>
+
+      <rect x="915" y="251"
+            width="113.19"
+            height="16"
+            rx="8"
+            fill="#f7df1e"/>
+
+      <text x="1295" y="268"
+            text-anchor="end"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="18"
+            fill="#c9d1d9">
+        34.3%
+      </text>
+    
+      <text x="755" y="316"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="19"
+            fill="#f0f6fc">
+        HTML
+      </text>
+
+      <rect x="915" y="299"
+            width="330"
+            height="16"
+            rx="8"
+            fill="url(#barBg)"/>
+
+      <rect x="915" y="299"
+            width="30"
+            height="16"
+            rx="8"
+            fill="#e34f26"/>
+
+      <text x="1295" y="316"
+            text-anchor="end"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="18"
+            fill="#c9d1d9">
+        4.9%
+      </text>
+    
+      <text x="755" y="364"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="19"
+            fill="#f0f6fc">
+        CSS
+      </text>
+
+      <rect x="915" y="347"
+            width="330"
+            height="16"
+            rx="8"
+            fill="url(#barBg)"/>
+
+      <rect x="915" y="347"
+            width="30"
+            height="16"
+            rx="8"
+            fill="#563d7c"/>
+
+      <text x="1295" y="364"
+            text-anchor="end"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="18"
+            fill="#c9d1d9">
+        3.9%
+      </text>
+    
+      <text x="755" y="412"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="19"
+            fill="#f0f6fc">
+        TypeScript
+      </text>
+
+      <rect x="915" y="395"
+            width="330"
+            height="16"
+            rx="8"
+            fill="url(#barBg)"/>
+
+      <rect x="915" y="395"
+            width="30"
+            height="16"
+            rx="8"
+            fill="#3178c6"/>
+
+      <text x="1295" y="412"
+            text-anchor="end"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="18"
+            fill="#c9d1d9">
+        1.1%
+      </text>
+    
+
+</svg>
