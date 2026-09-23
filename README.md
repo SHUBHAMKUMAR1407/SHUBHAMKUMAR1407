@@ -88,11 +88,9 @@ backend systems that solve real-world problems.
 
 <div align="center">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=SHUBHAMKUMAR1407&show_icons=true&theme=dark&hide_border=false&include_all_commits=true&count_private=true)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=SHUBHAMKUMAR1407&show_icons=true&theme=dark&hide_border=true)
 
-![GitHub Streak](https://nirzak-streak-stats.vercel.app/?user=SHUBHAMKUMAR1407&theme=dark&hide_border=false)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=SHUBHAMKUMAR1407&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=SHUBHAMKUMAR1407&layout=compact&theme=dark&hide_border=true)
 
 </div>
 
