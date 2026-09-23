@@ -39,7 +39,9 @@ jobs:
             });
 
             if (!response.ok) {
-              throw new Error(`${response.status}: ${await response.text()}`);
+              throw new Error(
+                `${response.status}: ${await response.text()}`
+              );
             }
 
             return response.json();
@@ -57,6 +59,7 @@ jobs:
               repos.push(...data);
 
               if (data.length < 100) break;
+
               page++;
             }
 
@@ -74,8 +77,11 @@ jobs:
 
           function formatNumber(number) {
             if (number >= 1000) {
-              return (number / 1000).toFixed(1).replace(".0", "") + "k";
+              return (
+                (number / 1000).toFixed(1).replace(".0", "") + "k"
+              );
             }
+
             return number.toString();
           }
 
@@ -115,7 +121,7 @@ jobs:
             }
 
             /*
-             * Calculate language usage from repository language statistics.
+             * Calculate language usage
              */
             const languageBytes = {};
 
@@ -125,12 +131,16 @@ jobs:
                   `https://api.github.com/repos/${username}/${repo.name}/languages`
                 );
 
-                for (const [language, bytes] of Object.entries(languages)) {
+                for (const [language, bytes] of Object.entries(
+                  languages
+                )) {
                   languageBytes[language] =
                     (languageBytes[language] || 0) + bytes;
                 }
               } catch (error) {
-                console.log(`Skipping languages for ${repo.name}`);
+                console.log(
+                  `Skipping languages for ${repo.name}`
+                );
               }
             }
 
@@ -138,19 +148,28 @@ jobs:
               .sort((a, b) => b[1] - a[1])
               .slice(0, 5);
 
-            const totalLanguageBytes = sortedLanguages.reduce(
-              (sum, [, bytes]) => sum + bytes,
-              0
+            const totalLanguageBytes =
+              sortedLanguages.reduce(
+                (sum, [, bytes]) => sum + bytes,
+                0
+              );
+
+            const languages = sortedLanguages.map(
+              ([name, bytes]) => ({
+                name,
+                percentage:
+                  totalLanguageBytes > 0
+                    ? (
+                        (bytes / totalLanguageBytes) *
+                        100
+                      ).toFixed(1)
+                    : "0.0",
+                color: languageColor(name)
+              })
             );
 
-            const languages = sortedLanguages.map(([name, bytes]) => ({
-              name,
-              percentage: ((bytes / totalLanguageBytes) * 100).toFixed(1),
-              color: languageColor(name)
-            }));
-
             /*
-             * Get contribution count using GitHub GraphQL.
+             * Get contribution count
              */
             let contributions = 0;
 
@@ -167,238 +186,395 @@ jobs:
                 }
               `;
 
-              const result = await github("https://api.github.com/graphql", {
-                method: "POST",
-                body: JSON.stringify({
-                  query,
-                  variables: {
-                    login: username
+              const result = await github(
+                "https://api.github.com/graphql",
+                {
+                  method: "POST",
+                  body: JSON.stringify({
+                    query,
+                    variables: {
+                      login: username
+                    }
+                  }),
+                  headers: {
+                    "Content-Type": "application/json"
                   }
-                }),
-                headers: {
-                  "Content-Type": "application/json"
                 }
-              });
+              );
 
               contributions =
                 result?.data?.user?.contributionsCollection
                   ?.contributionCalendar
                   ?.totalContributions || 0;
             } catch (error) {
-              console.log("Could not fetch contributions:", error.message);
+              console.log(
+                "Could not fetch contributions:",
+                error.message
+              );
             }
 
             const followers = user.followers || 0;
             const following = user.following || 0;
-            const repositories = user.public_repos || repos.length;
+            const repositories =
+              user.public_repos || repos.length;
 
+            /*
+             * Generate SVG
+             */
             const svg = `
-          <svg width="1400" height="520" viewBox="0 0 1400 520"
-               xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="1400"
+            height="520"
+            viewBox="0 0 1400 520"
+            xmlns="http://www.w3.org/2000/svg"
+          >
 
             <defs>
-              <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#0d1117"/>
-                <stop offset="100%" stop-color="#111820"/>
+
+              <linearGradient
+                id="background"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stop-color="#0d1117"
+                />
+                <stop
+                  offset="100%"
+                  stop-color="#111820"
+                />
               </linearGradient>
 
-              <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#101820"/>
-                <stop offset="100%" stop-color="#111a24"/>
+              <linearGradient
+                id="card"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stop-color="#101820"
+                />
+                <stop
+                  offset="100%"
+                  stop-color="#111a24"
+                />
               </linearGradient>
 
-              <linearGradient id="barBg" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#17212d"/>
-                <stop offset="100%" stop-color="#202d3c"/>
+              <linearGradient
+                id="barBg"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="0"
+              >
+                <stop
+                  offset="0%"
+                  stop-color="#17212d"
+                />
+                <stop
+                  offset="100%"
+                  stop-color="#202d3c"
+                />
               </linearGradient>
+
             </defs>
 
             <!-- Background -->
-            <rect width="1400" height="520" fill="url(#background)"/>
+
+            <rect
+              width="1400"
+              height="520"
+              fill="url(#background)"
+            />
 
             <!-- Heading -->
-            <text x="70" y="65"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="32"
-                  font-weight="700"
-                  fill="#f0f6fc">
+
+            <text
+              x="70"
+              y="65"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="32"
+              font-weight="700"
+              fill="#f0f6fc"
+            >
               📊 GitHub Stats
             </text>
 
-            <line x1="70" y1="88" x2="1330" y2="88"
-                  stroke="#30363d"
-                  stroke-width="1"/>
+            <line
+              x1="70"
+              y1="88"
+              x2="1330"
+              y2="88"
+              stroke="#30363d"
+              stroke-width="1"
+            />
 
             <!-- Left Card -->
-            <rect x="70" y="110" width="625" height="350"
-                  rx="12"
-                  fill="url(#card)"
-                  stroke="#303b49"
-                  stroke-width="1.5"/>
+
+            <rect
+              x="70"
+              y="110"
+              width="625"
+              height="350"
+              rx="12"
+              fill="url(#card)"
+              stroke="#303b49"
+              stroke-width="1.5"
+            />
 
             <!-- Right Card -->
-            <rect x="720" y="110" width="610" height="350"
-                  rx="12"
-                  fill="url(#card)"
-                  stroke="#303b49"
-                  stroke-width="1.5"/>
+
+            <rect
+              x="720"
+              y="110"
+              width="610"
+              height="350"
+              rx="12"
+              fill="url(#card)"
+              stroke="#303b49"
+              stroke-width="1.5"
+            />
 
             <!-- Name -->
-            <text x="100" y="165"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="31"
-                  font-weight="700"
-                  fill="#f0f6fc">
+
+            <text
+              x="100"
+              y="165"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="31"
+              font-weight="700"
+              fill="#f0f6fc"
+            >
               ${escapeXml(user.name || username)}
             </text>
 
-            <text x="100" y="198"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="19"
-                  fill="#8b949e">
+            <text
+              x="100"
+              y="198"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="19"
+              fill="#8b949e"
+            >
               Software Developer
             </text>
 
-            <!-- Stats -->
-            <text x="100" y="245"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="20"
-                  fill="#c9d1d9">
+            <!-- Repositories -->
+
+            <text
+              x="100"
+              y="245"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="20"
+              fill="#c9d1d9"
+            >
               ▣  Repositories
             </text>
 
-            <text x="360" y="245"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="21"
-                  font-weight="700"
-                  fill="#2f81f7">
+            <text
+              x="360"
+              y="245"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="21"
+              font-weight="700"
+              fill="#2f81f7"
+            >
               ${formatNumber(repositories)}
             </text>
 
-            <text x="100" y="285"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="20"
-                  fill="#c9d1d9">
+            <!-- Contributions -->
+
+            <text
+              x="100"
+              y="285"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="20"
+              fill="#c9d1d9"
+            >
               ⎇  Contributions
             </text>
 
-            <text x="360" y="285"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="21"
-                  font-weight="700"
-                  fill="#3fb950">
+            <text
+              x="360"
+              y="285"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="21"
+              font-weight="700"
+              fill="#3fb950"
+            >
               ${formatNumber(contributions)}
             </text>
 
-            <text x="100" y="325"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="20"
-                  fill="#c9d1d9">
+            <!-- Stars -->
+
+            <text
+              x="100"
+              y="325"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="20"
+              fill="#c9d1d9"
+            >
               ★  Stars
             </text>
 
-            <text x="360" y="325"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="21"
-                  font-weight="700"
-                  fill="#f2cc60">
+            <text
+              x="360"
+              y="325"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="21"
+              font-weight="700"
+              fill="#f2cc60"
+            >
               ${formatNumber(stars)}
             </text>
 
-            <text x="100" y="365"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="20"
-                  fill="#c9d1d9">
+            <!-- Followers -->
+
+            <text
+              x="100"
+              y="365"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="20"
+              fill="#c9d1d9"
+            >
               👥  Followers
             </text>
 
-            <text x="360" y="365"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="21"
-                  font-weight="700"
-                  fill="#a371f7">
+            <text
+              x="360"
+              y="365"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="21"
+              font-weight="700"
+              fill="#a371f7"
+            >
               ${formatNumber(followers)}
             </text>
 
-            <text x="100" y="405"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="20"
-                  fill="#c9d1d9">
+            <!-- Following -->
+
+            <text
+              x="100"
+              y="405"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="20"
+              fill="#c9d1d9"
+            >
               ◉  Following
             </text>
 
-            <text x="360" y="405"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="21"
-                  font-weight="700"
-                  fill="#f85149">
+            <text
+              x="360"
+              y="405"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="21"
+              font-weight="700"
+              fill="#f85149"
+            >
               ${formatNumber(following)}
             </text>
 
-            <!-- GitHub Logo -->
-<svg x="515" y="215" width="120" height="120" viewBox="0 0 24 24">
-  <path
-    fill="#f0f6fc"
-    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.292-1.552 3.297-1.23 3.297-1.23.647 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.216.69.825.575C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-</svg>
+            <!-- REAL GITHUB LOGO -->
 
-            <text x="575" y="380"
-                  text-anchor="middle"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="17"
-                  fill="#8b949e">
+            <svg
+              x="515"
+              y="215"
+              width="120"
+              height="120"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#f0f6fc"
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.292-1.552 3.297-1.23 3.297-1.23.647 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.81 1.102.81 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.216.69.825.575C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              />
+            </svg>
+
+            <!-- Logo Text -->
+
+            <text
+              x="575"
+              y="380"
+              text-anchor="middle"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="17"
+              fill="#8b949e"
+            >
               Code • Build • Learn
             </text>
 
-            <text x="575" y="405"
-                  text-anchor="middle"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="17"
-                  fill="#8b949e">
+            <text
+              x="575"
+              y="405"
+              text-anchor="middle"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="17"
+              fill="#8b949e"
+            >
               Repeat
             </text>
 
             <!-- Languages -->
-            <text x="755" y="165"
-                  font-family="Arial, Helvetica, sans-serif"
-                  font-size="30"
-                  font-weight="700"
-                  fill="#f0f6fc">
+
+            <text
+              x="755"
+              y="165"
+              font-family="Arial, Helvetica, sans-serif"
+              font-size="30"
+              font-weight="700"
+              fill="#f0f6fc"
+            >
               Top Languages
             </text>
 
             ${languages.map((lang, index) => {
               const y = 220 + index * 48;
+
               const width = Math.max(
                 30,
                 (parseFloat(lang.percentage) / 100) * 330
               );
 
               return `
-                <text x="755" y="${y}"
-                      font-family="Arial, Helvetica, sans-serif"
-                      font-size="19"
-                      fill="#f0f6fc">
+                <text
+                  x="755"
+                  y="${y}"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="19"
+                  fill="#f0f6fc"
+                >
                   ${escapeXml(lang.name)}
                 </text>
 
-                <rect x="915" y="${y - 17}"
-                      width="330"
-                      height="16"
-                      rx="8"
-                      fill="url(#barBg)"/>
+                <rect
+                  x="915"
+                  y="${y - 17}"
+                  width="330"
+                  height="16"
+                  rx="8"
+                  fill="url(#barBg)"
+                />
 
-                <rect x="915" y="${y - 17}"
-                      width="${width}"
-                      height="16"
-                      rx="8"
-                      fill="${lang.color}"/>
+                <rect
+                  x="915"
+                  y="${y - 17}"
+                  width="${width}"
+                  height="16"
+                  rx="8"
+                  fill="${lang.color}"
+                />
 
-                <text x="1295" y="${y}"
-                      text-anchor="end"
-                      font-family="Arial, Helvetica, sans-serif"
-                      font-size="18"
-                      fill="#c9d1d9">
+                <text
+                  x="1295"
+                  y="${y}"
+                  text-anchor="end"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="18"
+                  fill="#c9d1d9"
+                >
                   ${lang.percentage}%
                 </text>
               `;
@@ -407,10 +583,18 @@ jobs:
           </svg>
           `;
 
-            fs.mkdirSync("profile", { recursive: true });
-            fs.writeFileSync("profile/github-stats.svg", svg);
+            fs.mkdirSync("profile", {
+              recursive: true
+            });
 
-            console.log("GitHub stats generated successfully.");
+            fs.writeFileSync(
+              "profile/github-stats.svg",
+              svg
+            );
+
+            console.log(
+              "GitHub stats generated successfully."
+            );
           }
 
           main().catch(error => {
