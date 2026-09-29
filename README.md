@@ -1,6 +1,6 @@
 # Hi, I'm Shubham Kumar 👋
 
-### Full-Stack Developer | MERN Stack | React & Next..js
+### Full-Stack Developer | MERN Stack | React & Next.js
 
 🚀 Building scalable and production-ready web applications  
 💻 Experienced with React, Next.js, TypeScript, Node.js & PostgreSQL  
