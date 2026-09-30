@@ -18,10 +18,10 @@ I'm a Full-Stack Developer who enjoys turning ideas into scalable and user-frien
 
 ## 🌐 Connect With Me
 
-[![Instagram](https://img.shields.io/badge/Instagram-E1306C?logo=Instagram&logoColor=white)](https://www.instagram.com/_shubham.yadavv_/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shubham-kumar-5b986b257/)
-[![X](https://img.shields.io/badge/X-18181B?logo=X&logoColor=white)](https://x.com/Shubham03611230)
-[![Email](https://img.shields.io/badge/Email-EA4335?logo=gmail&logoColor=white)](mailto:sky143c@gmail.com)
+[![Instagram](https://img.shields.io/badge/Instagram-8B5CF6?logo=Instagram&logoColor=white)](https://www.instagram.com/_shubham.yadavv_/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-6366F1?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shubham-kumar-5b986b257/)
+[![X](https://img.shields.io/badge/X-4F46E5?logo=X&logoColor=white)](https://x.com/Shubham03611230)
+[![Email](https://img.shields.io/badge/Email-7C3AED?logo=gmail&logoColor=white)](mailto:sky143c@gmail.com)
 
 # 💻 Tech Stack
 
