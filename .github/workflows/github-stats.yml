@@ -149,10 +149,10 @@ jobs:
               .slice(0, 5);
 
             const totalLanguageBytes =
-              sortedLanguages.reduce(
-                (sum, [, bytes]) => sum + bytes,
-                0
-              );
+               Object.values(languageBytes).reduce(
+                 (sum, bytes) => sum + bytes,
+                    0
+                  );
 
             const languages = sortedLanguages.map(
               ([name, bytes]) => ({
