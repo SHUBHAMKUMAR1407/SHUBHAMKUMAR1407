@@ -3,7 +3,7 @@
 ### Full-Stack Developer | MERN Stack | React & Next.js
 
 🚀 Building scalable and production-ready web applications
-💻 Experienced with React, Next.js, TypeScript, Node.js & PostgreSQL.
+💻 Experienced with React, Next.js, TypeScript, Node.js & PostgreSQL
 🔧 Building REST APIs, authentication, RBAC & multi-vendor platforms
 ⚡ Focused on clean architecture, performance & real-world solutions
 
