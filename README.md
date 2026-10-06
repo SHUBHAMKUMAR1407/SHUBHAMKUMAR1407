@@ -72,7 +72,7 @@ I'm a Full-Stack Developer who enjoys turning ideas into scalable and user-frien
 ![Blender](https://img.shields.io/badge/Blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white)
 
 
-<div align="center">
+<div align="center">.
 
 <img src="./profile/github-stats.svg?v=2" width="100%" alt="GitHub Stats" />
 
