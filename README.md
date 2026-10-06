@@ -78,7 +78,7 @@ I'm a Full-Stack Developer who enjoys turning ideas into scalable and user-frien
 
 </div>
 
-### ✍️ Random Dev Quote
+### ✍️ Random Dev Quotes
 
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
