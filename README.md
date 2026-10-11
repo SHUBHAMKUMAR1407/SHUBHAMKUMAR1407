@@ -1,4 +1,4 @@
-# Hi, I'm Shubham Kumar 👋
+# Hi, I'm Shubham Kumar 👋.
 
 ### Full-Stack Developer | MERN Stack | React & Next.js
 
