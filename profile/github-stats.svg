@@ -160,7 +160,7 @@
     font-weight="700"
     fill="#2f81f7"
   >
-    20
+    29
   </text>
 
   <!-- Contributions -->
@@ -183,7 +183,7 @@
     font-weight="700"
     fill="#3fb950"
   >
-    908
+    919
   </text>
 
   <!-- Stars -->
@@ -330,7 +330,7 @@
       <rect
         x="915"
         y="203"
-        width="167.31"
+        width="175.23000000000002"
         height="16"
         rx="8"
         fill="#6e7681"
@@ -344,7 +344,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        50.7%
+        53.1%
       </text>
     
       <text
@@ -369,7 +369,7 @@
       <rect
         x="915"
         y="251"
-        width="110.88000000000001"
+        width="99"
         height="16"
         rx="8"
         fill="#f7df1e"
@@ -383,7 +383,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        33.6%
+        30.0%
       </text>
     
       <text
@@ -422,51 +422,12 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        5.6%
+        7.1%
       </text>
     
       <text
         x="755"
         y="364"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="19"
-        fill="#f0f6fc"
-      >
-        HTML
-      </text>
-
-      <rect
-        x="915"
-        y="347"
-        width="330"
-        height="16"
-        rx="8"
-        fill="url(#barBg)"
-      />
-
-      <rect
-        x="915"
-        y="347"
-        width="30"
-        height="16"
-        rx="8"
-        fill="#e34f26"
-      />
-
-      <text
-        x="1295"
-        y="364"
-        text-anchor="end"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="18"
-        fill="#c9d1d9"
-      >
-        5.2%
-      </text>
-    
-      <text
-        x="755"
-        y="412"
         font-family="Arial, Helvetica, sans-serif"
         font-size="19"
         fill="#f0f6fc"
@@ -476,6 +437,45 @@
 
       <rect
         x="915"
+        y="347"
+        width="330"
+        height="16"
+        rx="8"
+        fill="url(#barBg)"
+      />
+
+      <rect
+        x="915"
+        y="347"
+        width="30"
+        height="16"
+        rx="8"
+        fill="#563d7c"
+      />
+
+      <text
+        x="1295"
+        y="364"
+        text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="18"
+        fill="#c9d1d9"
+      >
+        5.8%
+      </text>
+    
+      <text
+        x="755"
+        y="412"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="19"
+        fill="#f0f6fc"
+      >
+        HTML
+      </text>
+
+      <rect
+        x="915"
         y="395"
         width="330"
         height="16"
@@ -489,7 +489,7 @@
         width="30"
         height="16"
         rx="8"
-        fill="#563d7c"
+        fill="#e34f26"
       />
 
       <text
@@ -500,7 +500,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        4.9%
+        4.0%
       </text>
     
 
