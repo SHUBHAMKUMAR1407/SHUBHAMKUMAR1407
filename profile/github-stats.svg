@@ -160,7 +160,7 @@
     font-weight="700"
     fill="#2f81f7"
   >
-    38
+    39
   </text>
 
   <!-- Contributions -->
@@ -183,7 +183,7 @@
     font-weight="700"
     fill="#3fb950"
   >
-    929
+    949
   </text>
 
   <!-- Stars -->
@@ -330,7 +330,7 @@
       <rect
         x="915"
         y="203"
-        width="145.2"
+        width="144.54"
         height="16"
         rx="8"
         fill="#6e7681"
@@ -344,7 +344,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        44.0%
+        43.8%
       </text>
     
       <text
@@ -369,7 +369,7 @@
       <rect
         x="915"
         y="251"
-        width="87.45"
+        width="87.12"
         height="16"
         rx="8"
         fill="#f7df1e"
@@ -383,7 +383,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        26.5%
+        26.4%
       </text>
     
       <text
@@ -408,7 +408,7 @@
       <rect
         x="915"
         y="299"
-        width="40.92"
+        width="40.59"
         height="16"
         rx="8"
         fill="#555555"
@@ -422,7 +422,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        12.4%
+        12.3%
       </text>
     
       <text
@@ -471,7 +471,7 @@
         font-size="19"
         fill="#f0f6fc"
       >
-        Python
+        TypeScript
       </text>
 
       <rect
@@ -489,7 +489,7 @@
         width="30"
         height="16"
         rx="8"
-        fill="#3776ab"
+        fill="#3178c6"
       />
 
       <text
@@ -500,7 +500,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        7.4%
+        7.8%
       </text>
     
 
