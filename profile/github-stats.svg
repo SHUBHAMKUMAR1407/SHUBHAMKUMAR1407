@@ -183,7 +183,7 @@
     font-weight="700"
     fill="#3fb950"
   >
-    949
+    954
   </text>
 
   <!-- Stars -->
@@ -330,7 +330,7 @@
       <rect
         x="915"
         y="203"
-        width="144.54"
+        width="142.89"
         height="16"
         rx="8"
         fill="#6e7681"
@@ -344,7 +344,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        43.8%
+        43.3%
       </text>
     
       <text
@@ -369,7 +369,7 @@
       <rect
         x="915"
         y="251"
-        width="87.12"
+        width="86.13000000000001"
         height="16"
         rx="8"
         fill="#f7df1e"
@@ -383,7 +383,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        26.4%
+        26.1%
       </text>
     
       <text
@@ -408,7 +408,7 @@
       <rect
         x="915"
         y="299"
-        width="40.59"
+        width="40.26"
         height="16"
         rx="8"
         fill="#555555"
@@ -422,7 +422,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        12.3%
+        12.2%
       </text>
     
       <text
@@ -447,7 +447,7 @@
       <rect
         x="915"
         y="347"
-        width="32.01"
+        width="31.35"
         height="16"
         rx="8"
         fill="#f34b7d"
@@ -461,7 +461,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        9.7%
+        9.5%
       </text>
     
       <text
@@ -500,7 +500,7 @@
         font-size="18"
         fill="#c9d1d9"
       >
-        7.8%
+        8.9%
       </text>
     
 
